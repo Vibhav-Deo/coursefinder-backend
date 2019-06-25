@@ -85,6 +85,7 @@ const getAllApplication = function (payloadData, callback) {
 
 const updateApplication = function (payloadData, callback) {
     let userData = payloadData;
+    console.log('[DATA]',userData)
     async.series([
         function (cb) {
             const criteria = { _id: userData.studentId }
@@ -103,7 +104,7 @@ const updateApplication = function (payloadData, callback) {
             })
         },
         function (cb) {
-            const criteria = { studentId: userData.studentId }
+            const criteria = { courseId: userData.courseId }
             SERVICES.APPLICATIONSERVICE.updateRecord(criteria, { $push: { status: { status: userData.status } } }, {},function (err, data) {
                 if (err) cb(err)
                 else {
